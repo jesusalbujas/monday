@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestor de Servicios</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header>
+    <div class="container row">
+      <div class="title">Gestor de Servicios</div>
+      <div class="toolbar">
+        <span id="stats" class="pill">0 servidores · 0 servicios</span>
+      </div>
+      <button id="openAdd" class="add-btn" title="Agregar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Agregar
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="boards" class="boards" aria-live="polite"></div>
+  </main>
+
+  <footer>
+    Arrastra y suelta servicios entre servidores. Los datos se guardan en tu navegador (localStorage).
+  </footer>
+
+  <!-- Modal Add/Edit -->
+  <dialog id="addModal" aria-modal="true" role="dialog">
+    <div class="modal-header">
+      <div class="modal-title">Agregar</div>
+      <div class="tabs" role="tablist">
+        <button class="tab" data-tab="service" aria-pressed="true" role="tab">Servicio</button>
+        <button class="tab" data-tab="server" aria-pressed="false" role="tab">Servidor</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <!-- Form Servicio -->
+      <form id="formService" autocomplete="off">
+        <div class="full">
+          <label for="svcName">Nombre del servicio</label>
+          <input id="svcName" placeholder="p. ej. API de pedidos" required />
+        </div>
+        <div class="full">
+          <label for="svcDesc">Descripción</label>
+          <textarea id="svcDesc" placeholder="Breve descripción"></textarea>
+        </div>
+        <div>
+          <label for="svcServer">Servidor destino</label>
+          <select id="svcServer"></select>
+        </div>
+        <div>
+          <label for="svcStatus">Estado</label>
+          <select id="svcStatus">
+            <option value="active">Activo</option>
+            <option value="inactive">Inactivo</option>
+          </select>
+        </div>
+        <div class="actions full">
+          <button type="button" class="btn ghost" id="cancelAdd1">Cancelar</button>
+          <button class="btn primary" type="submit">Guardar servicio</button>
+        </div>
+      </form>
+
+      <!-- Form Servidor -->
+      <form id="formServer" class="hidden" style="display:none" autocomplete="off">
+        <div>
+          <label for="srvName">Nombre del servidor</label>
+          <input id="srvName" placeholder="p. ej. srv-app-01" required />
+        </div>
+        <div>
+          <label for="srvIP">IP</label>
+          <input id="srvIP" placeholder="192.168.1.10" required />
+        </div>
+        <div>
+          <label for="srvStatus">Estado</label>
+          <select id="srvStatus">
+            <option value="active">Activo</option>
+            <option value="inactive">Inactivo</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="srvNote">Descripción (opcional)</label>
+          <input id="srvNote" placeholder="Ubicación, rol, SO, etc." />
+        </div>
+        <div class="actions full">
+          <button type="button" class="btn ghost" id="cancelAdd2">Cancelar</button>
+          <button class="btn primary" type="submit">Guardar servidor</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="assertive"></div>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
